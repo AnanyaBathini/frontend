@@ -23,7 +23,7 @@ const TabsLayout = () => {
     <Tabs
     screenOptions={{
         tabBarShowLabel:false,
-        tabBarActiveTintColor:"#FFA001",
+        tabBarActiveTintColor:"#9f773a",
         tabBarInactiveTintColor:"#CDCDE0",
         tabBarStyle: {
             backgroundColor:"#161622",
@@ -34,7 +34,7 @@ const TabsLayout = () => {
     }}
     >
         <Tabs.Screen 
-        name="home"
+        name="home1"
         options={{
             title:"Home",
             headerShown:false,
@@ -55,7 +55,7 @@ const TabsLayout = () => {
             headerShown:false,
             tabBarIcon:({color, focused}) =>(
                 <TabIcon 
-                icon={icons.plus}
+                icon={icons.resource}
                 color={color}
                 name="Resources"
                 focused={focused}
@@ -78,21 +78,8 @@ const TabsLayout = () => {
             )
         }}
         />
-        <Tabs.Screen 
-        name="bookmark"
-        options={{
-            title:"Bookmark",
-            headerShown:false,
-            tabBarIcon:({color, focused}) =>(
-                <TabIcon 
-                icon={icons.bookmark}
-                color={color}
-                name="Bookmark"
-                focused={focused}
-                />
-            )
-        }}
-        />
+        
+        
     </Tabs>
     
     </>

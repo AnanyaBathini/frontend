@@ -54,7 +54,7 @@ export default function App ()  {
             <Text className="text-lg text-gray-100 font-pregular">
               or Create Institution?
             </Text>
-            <Link href="/sign-up" className="text-lg font-psemibold text-secondary ">Sign Up
+            <Link href="/home1" className="text-lg font-psemibold text-secondary ">Sign Up
             </Link>
 
           </View>
