@@ -1,11 +1,10 @@
-import { View, Text, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, ScrollView, Image } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from "../../constants";
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
-import { Link, router } from "expo-router";
-import { useAuth } from '../../context/AuthContext';
+import { Link } from "expo-router";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -13,39 +12,9 @@ const SignIn = () => {
     password: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setUser } = useAuth();
 
-  const submit = async () => {
-    if (!form.email || !form.password) {
-      Alert.alert("Error", "Please fill in all fields");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const loggedInUser = await signInUser(form);
-      setUser(loggedInUser);
-      // Redirect based on role
-      if (loggedInUser.role === 'admin') {
-        router.push('/');
-      } else {
-        router.push('/');
-      }
-    } catch (error) {
-      Alert.alert("Error", error.message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const signInUser = async (credentials: { email: any; password?: string; }) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Dummy user for demonstration; replace with actual login logic
-        resolve({ email: credentials.email, role: credentials.email.includes('admin') ? 'admin' : 'user' });
-      }, 1000);
-    });
+  const submit = () => {
+    // Your submit function here
   };
 
   return (
@@ -57,12 +26,12 @@ const SignIn = () => {
             resizeMode='contain' 
             className='w-[260px] h-[198px]'
           />
-          <Text className='text-2xl text-white font-semibold mt-10'>
-            Login to Aora
+          <Text className='text-2xl text-white text-semibold mt-10 font-psemibold'>
+            Login 
           </Text>
           <FormField
-            title="Email"
-            value={form.email}
+            title="Username"
+            value={form.username}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherstyles='mt-7'
           />
@@ -74,7 +43,7 @@ const SignIn = () => {
           />
           <CustomButton
             title="Sign In"
-            handlePress={submit}
+            handlePress={submit} 
             containerStyles="mt-7"
             isLoading={isSubmitting}
           />

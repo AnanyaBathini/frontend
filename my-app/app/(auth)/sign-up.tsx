@@ -1,80 +1,61 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import FormField from '@/components/FormField';
-import CustomButton from '@/components/CustomButton';
-import { useAuth } from '../../context/AuthContext';
-import { Link, useRouter } from 'expo-router';
+import { useState } from "react";
+import { Link } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text, ScrollView, Dimensions, Image } from "react-native";
+
+import { images } from "../../constants";
+import CustomButton from "@/components/CustomButton";
+import FormField from "@/components/FormField";
 
 const SignUp = () => {
+  const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    institutionName: '',
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    institute: "",
+    password: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setUser } = useAuth();
-  const router = useRouter();
 
   const submit = async () => {
-    if (!form.institutionName || !form.username || !form.email || !form.password) {
-      Alert.alert("Error", "Please fill in all fields");
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    try {
-      const newAdmin = await createInstitutionAndUser(form);
-      setUser(newAdmin);
-      Alert.alert("Success", "Institution created and admin account created successfully");
-      router.push('/'); // Redirect to admin dashboard after creation
-    } catch (error) {
-      Alert.alert("Error", error.message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const createInstitutionAndUser = async (userData) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ ...userData, role: 'admin' });
-      }, 1000);
-    });
+    // Add the submit function if needed
   };
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-        <View className='w-full justify-center px-4 my-6 h-full'>
-          <Text className='text-2xl text-white font-semibold mt-10'>
-            Create Institution Account
-          </Text>
-          <FormField
-            title="Institution Name"
-            value={form.institutionName}
-            handleChangeText={(e) => setForm({ ...form, institutionName: e })}
-            otherstyles='mt-7'
+        <View
+          className="w-full flex justify-center h-full px-4 my-6 "
+          style={{
+            minHeight: Dimensions.get("window").height - 100,
+          }}
+        >
+          
+          <Image
+            source={images.logo}
+            resizeMode="contain"
+            className="w-[260px] h-[198px]"
           />
+          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold ">
+            Sign Up 
+          </Text>
+
           <FormField
             title="Username"
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
-            otherstyles='mt-7'
+            otherStyles="mt-10"
           />
           <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherstyles='mt-7'
+            title="Institute"
+            value={form.institute}
+            handleChangeText={(e) => setForm({ ...form, institute: e })}
+            otherStyles="mt-7"
+            
           />
           <FormField
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherstyles='mt-7'
+            otherStyles="mt-7"
           />
           <CustomButton
             title="Sign Up"
@@ -82,15 +63,19 @@ const SignUp = () => {
             containerStyles="mt-7"
             isLoading={isSubmitting}
           />
-          <View className='justify-center pt-5 flex-row gap-2'>
+          <View className="flex justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-gray-100 font-pregular">
               Existing user?
             </Text>
-            <Link href="/sign-in" className="text-lg font-psemibold text-secondary">
+            <Link
+              href="/sign-in"
+              className="text-lg font-psemibold text-secondary"
+            >
               Login
             </Link>
           </View>
         </View>
+        
       </ScrollView>
     </SafeAreaView>
   );
