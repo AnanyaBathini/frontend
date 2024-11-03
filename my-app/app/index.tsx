@@ -1,4 +1,4 @@
-import { AuthProvider } from '../context/AuthContext'; 
+
 import { StatusBar } from "expo-status-bar";
 import { Redirect, router } from "expo-router";
 import { View, Text, Image, ScrollView } from "react-native";
@@ -15,7 +15,7 @@ export default function App ()  {
  
 
   return (
-    <AuthProvider>
+    
     <SafeAreaView className="bg-primary h-full">
       
 
@@ -54,7 +54,7 @@ export default function App ()  {
             <Text className="text-lg text-gray-100 font-pregular">
               or Create Institution?
             </Text>
-            <Link href="/home1" className="text-lg font-psemibold text-secondary ">Sign Up
+            <Link href="/home" className="text-lg font-psemibold text-secondary ">Sign Up
             </Link>
 
           </View>
@@ -63,7 +63,7 @@ export default function App ()  {
 
       <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
-    </AuthProvider>
+    
   );
 };
 
